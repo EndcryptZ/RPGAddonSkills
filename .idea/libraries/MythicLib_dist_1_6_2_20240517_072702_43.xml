@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="MythicLib-dist-1.6.2-20240517.072702-43">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../Plugins/MMOItems-6.10-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../Plugins/MMOCore-1.12.1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

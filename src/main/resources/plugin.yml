@@ -1,0 +1,5 @@
+name: RPGAddonSkills
+version: '${project.version}'
+main: me.exendv2.rpgaddonskills.RPGAddonSkills
+author: ExEndV2
+api-version: '1.20'
