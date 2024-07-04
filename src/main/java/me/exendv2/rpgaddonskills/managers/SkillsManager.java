@@ -2,6 +2,7 @@ package me.exendv2.rpgaddonskills.managers;
 import me.exendv2.rpgaddonskills.RPGAddonSkills;
 import me.exendv2.rpgaddonskills.events.PlayerSkillCastEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -14,6 +15,10 @@ public class SkillsManager {
     PlayerManager playerManager = RPGAddonSkills.getInstance().getPlayerManager();
 
     public void rightClick(Player player) {
+        if(player.getGameMode().equals(GameMode.SPECTATOR)){
+            return;
+        }
+
         if (!this.playerManager.canCastSkill(player))
             return;
         if (player.isSneaking())
@@ -54,6 +59,9 @@ public class SkillsManager {
     }
 
     public void leftClick(Player player) {
+        if(player.getGameMode().equals(GameMode.SPECTATOR)){
+            return;
+        }
         if (!this.playerManager.canCastSkill(player))
             return;
         if (player.isSneaking()) {

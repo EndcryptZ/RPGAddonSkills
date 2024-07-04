@@ -54,6 +54,7 @@ public class PlayerManager {
                 break;
             }
         }
+
         return canCast;
     }
 
@@ -153,7 +154,7 @@ public class PlayerManager {
         if (!mana.equals("null"))
             skillCommand = skillCommand + " mana " + mana;
         if (!damagebuff.equals("null"))
-            skillCommand = skillCommand + " damagebuff " + damagebuff;
+            skillCommand = skillCommand + " damage_buff " + damagebuff;
         if (!healthcost.equals("null")) {
             double healthcostTotal = Double.parseDouble(healthcost) * player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
             skillCommand = skillCommand + " healthcost " + healthcostTotal;
