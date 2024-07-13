@@ -1,4 +1,7 @@
 package me.exendv2.rpgaddonskills.managers;
+import io.lumine.mythic.api.adapters.AbstractPlayer;
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.bukkit.MythicBukkit;
 import me.exendv2.rpgaddonskills.RPGAddonSkills;
 import me.exendv2.rpgaddonskills.events.PlayerSkillCastEvent;
 import org.bukkit.Bukkit;
@@ -17,6 +20,18 @@ public class SkillsManager {
     public void rightClick(Player player) {
         if(player.getGameMode().equals(GameMode.SPECTATOR)){
             return;
+        }
+
+        if(playerManager.getPlayerClass(player).equalsIgnoreCase("artificer")){
+            AbstractPlayer abstractPlayer = BukkitAdapter.adapt(player);
+
+            if(MythicBukkit.inst().getSkillManager().getCaster(abstractPlayer).getAuraRegistry().hasAura("Arcane_Mecha_Aura")){
+                if(!playerManager.canCastSkill(player)){
+                    return;
+                }
+                playerManager.castSkill(player, "first");
+                return;
+            }
         }
 
         if (!this.playerManager.canCastSkill(player))
@@ -67,9 +82,7 @@ public class SkillsManager {
         if (player.isSneaking()) {
             this.playerManager.castSkill(player, "ultimate");
             player.sendTitle("", "§a§nSHIFT§7-§a§nL§7", 0, 10, 0);
-            this.playerManager.removePlayerCombo(player);
-            this.playerManager.removePlayerCastingSkill(player);
-            callPlayerSkillCastEvent(player, "SR");
+            callPlayerSkillCastEvent(player, "SL");
             return;
         }
         String combo = this.playerManager.getPlayerCombo(player);
@@ -120,7 +133,7 @@ public class SkillsManager {
                 player.playSound(player, Sound.BLOCK_LEVER_CLICK, 1.0F, 2.0F);
                 SkillsManager.this.playerManager.removePlayerCooldown(player);
             }
-        }).runTaskLaterAsynchronously(RPGAddonSkills.getInstance(), 1L);
+        }).runTaskLaterAsynchronously(RPGAddonSkills.getInstance(), 2L);
     }
 
     public void callPlayerSkillCastEvent(Player player, String skill){
